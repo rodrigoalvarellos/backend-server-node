@@ -1,0 +1,8 @@
+// Node
+
+Ejecutar proyecto 
+#node app
+#npm start --> para ejecutar con el nodemon
+
+// Ejecutar Nodemon
+#nodemon [nombre archivo]
