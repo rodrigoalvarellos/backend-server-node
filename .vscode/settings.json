@@ -4,5 +4,6 @@
     "editor.formatOnType": true,
     "jshint.options": {
         "esversion": 6
-    }
+    },
+    "eslint.enable": false
 }
