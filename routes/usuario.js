@@ -1,6 +1,5 @@
 var express = require('express');
 var bcrypt = require('bcryptjs');
-var jwt = require('jsonwebtoken');
 
 var mdAutenticacion = require('../middlewares/autenticacion');
 
@@ -17,7 +16,12 @@ var Usuario = require('../models/usuario');
 
 app.get('/', (req, res, next) => {
 
+  var desde = req.query.desde || 0;
+  desde = Number(desde);
+
   Usuario.find({}, 'nombre email img role')
+    .skip(desde) //salta los xxx registros
+    .limit(5) // Limita cierta cantidad de registros Mongose
     .exec((err, usuarios) => {
 
       if (err) {
@@ -28,10 +32,16 @@ app.get('/', (req, res, next) => {
         });
       }
 
-      res.status(200).json({
-        ok: true,
-        usuarios: usuarios
+      Usuario.count({}, (err, conteo) => {
+
+        res.status(200).json({
+          ok: true,
+          usuarios: usuarios,
+          total: conteo
+        });
+
       });
+
 
     });
 
