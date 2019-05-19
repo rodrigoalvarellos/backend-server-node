@@ -62,7 +62,7 @@ app.post('/', (req, res) => {
 
       ok: true,
       mensaje: 'Login post correcto',
-      usuarioBD: usuarioBD,
+      usuario: usuarioBD,
       token: token,
       id: usuarioBD._id
 
@@ -141,7 +141,7 @@ app.post('/google', async (req, res) => {
     
           ok: true,
           mensaje: 'Login post correcto',
-          usuarioBD: usuarioBD,
+          usuario: usuarioBD,
           token: token,
           id: usuarioBD._id
     
@@ -162,13 +162,21 @@ app.post('/google', async (req, res) => {
 
       usuario.save((err, usuarioBD) => {
 
+        if (err) {
+          return res.status(400).json({    
+            ok: false,
+            mensaje: 'Error al logearse con Google',
+            error: err
+          });
+        }
+
         var token = jwt.sign( { usuario: usuarioBD }, SEED, { expiresIn: 14400 });
     
         res.status(200).json({
     
           ok: true,
           mensaje: 'Login post correcto',
-          usuarioBD: usuarioBD,
+          usuario: usuarioBD,
           token: token,
           id: usuarioBD._id
     

@@ -8,6 +8,15 @@ var bodyParser = require('body-parser');
 // Inicializar variables
 var app = express();
 
+// configuracion de CORS
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+
+    next();
+});
+
 //BodyParse - parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
     extended: false
@@ -32,7 +41,7 @@ mongoose.connection.openUri('mongodb://localhost:27017/hospitalDB', {
 // var serveIndex = require('serve-index');
 // app.use(express.static(__dirname + '/'));
 // app.use('/uploads', serveIndex(__dirname + '/uploads'));
-   
+
 
 // Importar Rutas
 var appRoutes = require('./routes/app');

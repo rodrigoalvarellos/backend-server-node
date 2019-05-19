@@ -3,7 +3,7 @@
     "editor.formatOnSave": false,
     "editor.formatOnType": true,
     "jshint.options": {
-        "esversion": 6
+        "esversion": 8
     },
     "eslint.enable": false
 }
