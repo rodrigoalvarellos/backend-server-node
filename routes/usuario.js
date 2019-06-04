@@ -19,7 +19,7 @@ app.get('/', (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Usuario.find({}, 'nombre email img role')
+  Usuario.find({}, 'nombre email img role google')
     .skip(desde) //salta los xxx registros
     .limit(5) // Limita cierta cantidad de registros Mongose
     .exec((err, usuarios) => {
