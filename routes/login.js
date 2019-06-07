@@ -64,7 +64,8 @@ app.post('/', (req, res) => {
       mensaje: 'Login post correcto',
       usuario: usuarioBD,
       token: token,
-      id: usuarioBD._id
+      id: usuarioBD._id,
+      menu: obtenerMenu( usuarioBD.role)
 
     });
 
@@ -143,7 +144,8 @@ app.post('/google', async (req, res) => {
           mensaje: 'Login post correcto',
           usuario: usuarioBD,
           token: token,
-          id: usuarioBD._id
+          id: usuarioBD._id,
+          menu: obtenerMenu( usuarioBD.role )
     
         });
 
@@ -178,7 +180,8 @@ app.post('/google', async (req, res) => {
           mensaje: 'Login post correcto',
           usuario: usuarioBD,
           token: token,
-          id: usuarioBD._id
+          id: usuarioBD._id,
+          menu: obtenerMenu( usuario.role )
     
         });
 
@@ -199,5 +202,41 @@ app.post('/google', async (req, res) => {
   // });
 
 });
+
+function obtenerMenu(ROLE) {
+
+  menu = [
+    {
+      titulo: 'Principal',
+      icono: 'mdi mdi-gauge',
+      submenu: [
+        { titulo: 'Deshboard', url: '/dashboard' },
+        { titulo: 'ProgressBar', url: '/progress' },
+        { titulo: 'Graficas', url: '/graficas1' },
+        { titulo: 'Promesas', url: '/promesas' },
+        { titulo: 'RxJS', url: '/rxjs' }
+      ]
+    },
+    {
+      titulo: 'Mantenimientos',
+      icono: 'mdi mdi-folder-lock-open',
+      submenu: [
+        // { titulo: 'Usuarios', url: '/usuarios' },
+        { titulo: 'Hospitales', url: '/hospitales' },
+        { titulo: 'Medicos', url: '/medicos' }
+      ]
+
+    }
+  ];
+
+
+  if (ROLE === 'ADMIN_ROLE') {
+    
+    menu[1].submenu.unshift({ titulo: 'Usuarios', url: '/usuarios' });
+  }
+  
+  return menu;
+  
+}
 
 module.exports = app;
