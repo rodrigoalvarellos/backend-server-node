@@ -15,3 +15,5 @@ Correr Lite Server con
 ```
 npm run dev
 ```
+
+Actualizado el 19/08/2019
